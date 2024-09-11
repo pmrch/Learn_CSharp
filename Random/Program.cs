@@ -10,17 +10,6 @@ namespace Proba
     {
         static void Main(string[] args)
         {
-            /*
-            decimal fakt = 1;
-
-            for (decimal i = 1; i <= 18; i++)
-            {
-                fakt = fakt * i;
-                Console.WriteLine("{0}! {1}  ", i, fakt);
-            }
-            Console.ReadKey();
-        */
-
             Random rnd = new Random();
 
             for (int i = 0; i < 10; i++)
