@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32929.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valami", "Valami.csproj", "{772A9B50-37ED-4B14-8CC0-EEA7E95B60E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valami", "Valami.csproj", "{8BED4293-C8DB-49AB-A97C-AFD8EEA36131}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{772A9B50-37ED-4B14-8CC0-EEA7E95B60E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{772A9B50-37ED-4B14-8CC0-EEA7E95B60E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{772A9B50-37ED-4B14-8CC0-EEA7E95B60E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{772A9B50-37ED-4B14-8CC0-EEA7E95B60E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BED4293-C8DB-49AB-A97C-AFD8EEA36131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BED4293-C8DB-49AB-A97C-AFD8EEA36131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BED4293-C8DB-49AB-A97C-AFD8EEA36131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BED4293-C8DB-49AB-A97C-AFD8EEA36131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C5019929-BCCA-4B51-9AC4-28A0F665D01B}
+		SolutionGuid = {F0F8CC0D-6C37-4868-B719-C57E09BDF9DD}
 	EndGlobalSection
 EndGlobal
