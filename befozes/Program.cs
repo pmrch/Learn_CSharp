@@ -18,11 +18,11 @@ namespace befozes
             Console.WriteLine();
             Console.WriteLine("3. feladat: ");
 
-            //int max = uvegek.Max();
-            //int index = uvegek.FindIndex(max);
+            int max = uvegek.Max();
+            int index = uvegek.IndexOf(max);
 
-            int max = 0;
-            int index = 0;
+            //int max = 0;
+            //int index = 0;
 
             for (int i = 0; i < uvegek.Count(); i++)
             {
