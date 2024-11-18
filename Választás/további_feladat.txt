@@ -1,0 +1,10 @@
+Határozza meg, hogy az egyes választókerületekben kik lettek a képviselők!
+Írja ki a választókerület sorszámát, a győztes vezeték- és utónevét, valamint az őt támogató párt
+rövidítését, vagy azt, hogy független egy-egy szóközzel elválasztva a kepviselok.txt nevű
+szöveges fájlba! Az adatok a választókerületek száma szerinti sorrendben jelenjenek meg! Minden sorba
+egy képviselő adatai kerüljenek!
+
+1 Petrezselyem Petra ZEP 
+2 Oldalas Olga HEP
+3 Tejes Attila TISZ
+4 Monitor Tibor független
