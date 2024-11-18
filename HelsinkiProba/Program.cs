@@ -79,7 +79,7 @@ namespace Helsinki
                 */
             }
             Console.WriteLine("4. feladat");
-            Console.WriteLine("Arany: {0}\nEzust: {1}\nBronz: {2}\nOsszesen: {3}\n", arany, ezust, bronz, osszes);
+            Console.WriteLine("Arany: {0}\nEzüst: {1}\nBronz: {2}\nÖsszesen: {3}\n", arany, ezust, bronz, osszes);
             
             // 5. Feladat
             Console.WriteLine("5. feladat");
@@ -109,7 +109,7 @@ namespace Helsinki
                         break;
                 }
             }
-            Console.WriteLine("Olimpiai pontok szama: {0}\n", pontszamok);
+            Console.WriteLine("Olimpiai pontok száma: {0}\n", pontszamok);
             Console.WriteLine("6. feladat");
 
             int uszas_ermek = 0, torna_ermek = 0;
@@ -127,11 +127,11 @@ namespace Helsinki
             }
 
             if (uszas_ermek > torna_ermek)
-                Console.WriteLine("Uszas sportagban szereztek tobb ermet");
+                Console.WriteLine("Úszás sportágban szereztek több érmet");
             else if (uszas_ermek == torna_ermek)
-                Console.WriteLine("Torna es uszas sportagban ugyanannyi ermet szereztek");
+                Console.WriteLine("Torna és úszás sportágban ugyanannyi érmet szereztek");
             else
-                Console.WriteLine("Torna sportagban szereztek tobb ermet\n");
+                Console.WriteLine("Torna sportágban szereztek több érmet\n");
 
             // 7. Feladat
             List<HelsinkiSorok> masolat = new List<HelsinkiSorok>();
@@ -177,7 +177,7 @@ namespace Helsinki
                     segito.sportag = item.sportag; segito.versenyszam = item.versenyszam;
                 }
             }
-            Console.WriteLine("Helyezes: {0}\nSportag: {1}\nVersenyszam: {2}\nSportolok Szama: {3}",
+            Console.WriteLine("Helyezés: {0}\nSportág: {1}\nVersenyszám: {2}\nSportolók Száma: {3}",
             segito.helyezes, segito.sportag, segito.versenyszam, segito.sportolok);
         }
     }
