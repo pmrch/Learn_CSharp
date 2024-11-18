@@ -4,7 +4,9 @@ namespace Létra
 {
     internal class Program
     {
-        static void Main(string[] args)
+#pragma warning disable IDE0051 // Remove unused private members
+        static void New_Main(string[] args)
+#pragma warning restore IDE0051 // Remove unused private members
         {
             int[] adatok = { 3, 1, 1, 2, 1, 5, 5, 4, 4, 4, 1, 2, 3, 6, 4, 6, 1, 4 };
             int[] masik_adatok = new int[adatok.Length];
