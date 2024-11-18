@@ -73,7 +73,6 @@ namespace dolgozat_nov4
             Console.WriteLine();
 
             // 6. Feladat
-            bool van_ketto = false;
             foreach (int szam in szamok)
             {
                 if (szam < 30 && szam > 20)
