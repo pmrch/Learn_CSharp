@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using System.IO;
 using System.Transactions;
 
@@ -125,6 +126,63 @@ namespace Valasztas
                     Console.WriteLine($"{kepviselok[i].vnev} {kepviselok[i].knev} {kepviselok[i].part}");
                 }
             }
+
+            // 7. Feladat
+            Console.WriteLine("\n7. Feladat");
+            int[] indexek = new int[5];
+
+            int maxGyep = 0, maxHep = 0, maxTisz = 0, maxZep = 0, maxFugg = 0;
+
+            for (int i = 0; i < kepviselok.Count(); i++)
+            {
+                if (kepviselok[i].part == "GYEP")
+                {
+                    if (kepviselok[i].szavazat > maxGyep)
+                    {
+                        maxGyep = kepviselok[i].szavazat;
+                        indexek[0] = i; // Store the index of the top candidate for GYEP
+                    }
+                }
+                else if (kepviselok[i].part == "HEP")
+                {
+                    if (kepviselok[i].szavazat > maxHep)
+                    {
+                        maxHep = kepviselok[i].szavazat;
+                        indexek[1] = i; // Store the index of the top candidate for HEP
+                    }
+                }
+                else if (kepviselok[i].part == "TISZ")
+                {
+                    if (kepviselok[i].szavazat > maxTisz)
+                    {
+                        maxTisz = kepviselok[i].szavazat;
+                        indexek[2] = i; // Store the index of the top candidate for TISZ
+                    }
+                }
+                else if (kepviselok[i].part == "ZEP")
+                {
+                    if (kepviselok[i].szavazat > maxZep)
+                    {
+                        maxZep = kepviselok[i].szavazat;
+                        indexek[3] = i; // Store the index of the top candidate for ZEP
+                    }
+                }
+                else // Assuming the rest are independents
+                {
+                    if (kepviselok[i].szavazat > maxFugg)
+                    {
+                        maxFugg = kepviselok[i].szavazat;
+                        indexek[4] = i; // Store the index of the top independent candidate
+                    }
+                }
+            }
+            
+            if (indexek[0] != -1) Console.WriteLine($"1 {kepviselok[indexek[0]].vnev} {kepviselok[indexek[0]].knev} {kepviselok[indexek[0]].part}");
+            if (indexek[1] != -1) Console.WriteLine($"2 {kepviselok[indexek[1]].vnev} {kepviselok[indexek[1]].knev} {kepviselok[indexek[1]].part}");
+            if (indexek[2] != -1) Console.WriteLine($"3 {kepviselok[indexek[2]].vnev} {kepviselok[indexek[2]].knev} {kepviselok[indexek[2]].part}");
+            if (indexek[3] != -1) Console.WriteLine($"4 {kepviselok[indexek[3]].vnev} {kepviselok[indexek[3]].knev} {kepviselok[indexek[3]].part}");
+            if (indexek[4] != -1) Console.WriteLine($"5 {kepviselok[indexek[4]].vnev} {kepviselok[indexek[4]].knev} fuggetlen");
+            
         }
     }
 }
