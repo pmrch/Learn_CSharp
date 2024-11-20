@@ -7,60 +7,20 @@ namespace Helsinki
 {
     class Program
     {
-        struct HelsinkiSorok
-        {
-            public int helyezes, sportolok;
-            public string sportag, versenyszam;
-        }
         static void Main(string[] args)
         {
-            List<HelsinkiSorok> pontszerzok = new List<HelsinkiSorok>();
+            List<Helyezes> pontszerzok = new List<Helyezes>();
             
-            using (StreamReader reader = new StreamReader("helsinki.txt"))
+            foreach (var item in File.ReadAllLines("helsinki.txt"))
             {
-                while (!reader.EndOfStream)
-                {
-                    string[] egy_sor = reader.ReadLine().Split(' ');;
-                    
-                    HelsinkiSorok seged = new HelsinkiSorok();
-                    seged.helyezes = int.Parse(egy_sor[0]);
-                    seged.sportolok = int.Parse(egy_sor [1]);
-                    seged.sportag = egy_sor[2];
-                    seged.versenyszam = egy_sor[3];
-
-                    pontszerzok.Add(seged);
-                }
+                pontszerzok.Add(new Helyezes(item));
             }
-
-            foreach (var item in pontszerzok)
-            { 
-                Console.WriteLine("{0}\t{1}", item.helyezes, item.sportolok);
-            }
-
-            Console.WriteLine("\n3. feladat");
-            Console.WriteLine("A pontszerző helyezések száma: {0}", pontszerzok.Count(), "\n");
+            Console.WriteLine($"3. Feladat:\n Pontszerző helyezések száma {pontszerzok.Count()}");
             
             // 4. Feladat
             int arany = 0, ezust = 0, bronz = 0, osszes = 0;
             foreach (var item in pontszerzok)
             {
-                if (item.helyezes == 1)
-                {
-                    arany++;
-                    osszes++;
-                }
-                else if (item.helyezes == 2)
-                {
-                    ezust++;
-                    osszes++;
-                }
-                else if (item.helyezes == 3)
-                {
-                    bronz++;
-                    osszes++;
-                }
-
-                /* Ez is mukodik, csak nem tudom hogy elfogadott-e
                 switch (item.helyezes)
                 {
                     case 1: 
@@ -76,7 +36,6 @@ namespace Helsinki
                         osszes++;
                         break;
                 }
-                */
             }
             Console.WriteLine("4. feladat");
             Console.WriteLine("Arany: {0}\nEzüst: {1}\nBronz: {2}\nÖsszesen: {3}\n", arany, ezust, bronz, osszes);
@@ -84,31 +43,13 @@ namespace Helsinki
             // 5. Feladat
             Console.WriteLine("5. feladat");
             int pontszamok = 0;
+            int[] lehetseges_pontszamok = { 7, 5, 4, 3, 2, 1 };
             
             foreach (var item in pontszerzok)
             {
-                switch (item.helyezes)
-                {
-                    case 1:
-                        pontszamok += 7;
-                        break;
-                    case 2:
-                        pontszamok += 5;
-                        break;
-                    case 3:
-                        pontszamok += 4;
-                        break;
-                    case 4:
-                        pontszamok += 3;
-                        break;
-                    case 5:
-                        pontszamok += 2;
-                        break;
-                    case 6:
-                        pontszamok += 1;
-                        break;
-                }
+                pontszamok += lehetseges_pontszamok[item.helyezes - 1];
             }
+
             Console.WriteLine("Olimpiai pontok száma: {0}\n", pontszamok);
             Console.WriteLine("6. feladat");
 
@@ -132,53 +73,44 @@ namespace Helsinki
                 Console.WriteLine("Torna és úszás sportágban ugyanannyi érmet szereztek");
             else
                 Console.WriteLine("Torna sportágban szereztek több érmet\n");
-
+            
             // 7. Feladat
-            List<HelsinkiSorok> masolat = new List<HelsinkiSorok>();
-            using (StreamWriter writer = new StreamWriter("helsinki2.txt"))
+            List<string> masolat = new List<string>();
+            foreach (var item in pontszerzok)
             {
-                HelsinkiSorok seged = new HelsinkiSorok();
-
-                foreach (var item in pontszerzok)
+                string fix = item.sportag;
+                if (fix == "kajakkenu")
                 {
-                    seged.helyezes = item.helyezes;
-                    seged.sportolok = item.sportolok;
-                    seged.versenyszam = item.versenyszam;
-                    seged.sportag = item.sportag;
-
-                    if (item.sportag == "kajakkenu")                    
-                        seged.sportag = "kajak-kenu";
-
-                    masolat.Add(seged);
+                    fix = "kajak-kenu";
+                    masolat.Add($"{item.helyezes} {item.sportag}, {lehetseges_pontszamok[item.helyezes] - 1} {fix}, {item.versenyszam}");
                 }
-
-                int olimpiai_pont = 0;
-                foreach (var item in masolat)                
-                {
-                    switch (item.helyezes) {
-                        case 1: olimpiai_pont = 7; break; case 2: olimpiai_pont = 5; break; case 3: olimpiai_pont = 4; break;
-                        case 5: olimpiai_pont = 3; break; case 6: olimpiai_pont = 2; break; case 7: olimpiai_pont = 1; break;
-                    }
-                    writer.WriteLine("{0} {1} {2} {3} {4}", item.helyezes, item.sportolok, olimpiai_pont, item.sportag, item.versenyszam);
-                }   
             }
+            File.WriteAllLines("helsinki2.txt", masolat);  
+            
             // 8. Feladat
             Console.WriteLine("8. feladat");
             
-            int legnagyobb_csapat = 0;;
-            HelsinkiSorok segito = new HelsinkiSorok();
+            int legnagyobb_csapat = 0;
+            List<Helyezes> segito = new List<Helyezes>();
+            Helyezes[] segito2 = new Helyezes[segito.Count()];
 
-            foreach (var item in masolat)
+            foreach (var item in File.ReadAllLines("helsinki2.txt"))
+            {
+                segito.Add(new Helyezes(item));
+            }
+            int hm = 0;
+            foreach (var item in segito)
             {
                 if (legnagyobb_csapat < item.sportolok)
                 {
                     legnagyobb_csapat = item.sportolok;
-                    segito.helyezes = item.helyezes; segito.sportolok = item.sportolok;
-                    segito.sportag = item.sportag; segito.versenyszam = item.versenyszam;
+                    segito2[hm].helyezes = item.helyezes; segito2[hm].sportolok = item.sportolok;
+                    segito2[hm].sportag = item.sportag; segito2[hm].versenyszam = item.versenyszam;
                 }
+                hm++;
             }
             Console.WriteLine("Helyezés: {0}\nSportág: {1}\nVersenyszám: {2}\nSportolók Száma: {3}",
-            segito.helyezes, segito.sportag, segito.versenyszam, segito.sportolok);
+            segito2.helyezes, segito2.sportag, segito2.versenyszam, segito2.sportolok);
         }
     }
 }
