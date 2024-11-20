@@ -140,7 +140,7 @@ namespace Valasztas
                     if (kepviselok[i].szavazat > maxGyep)
                     {
                         maxGyep = kepviselok[i].szavazat;
-                        indexek[0] = i; // Store the index of the top candidate for GYEP
+                        indexek[0] = i;
                     }
                 }
                 else if (kepviselok[i].part == "HEP")
@@ -148,7 +148,7 @@ namespace Valasztas
                     if (kepviselok[i].szavazat > maxHep)
                     {
                         maxHep = kepviselok[i].szavazat;
-                        indexek[1] = i; // Store the index of the top candidate for HEP
+                        indexek[1] = i;
                     }
                 }
                 else if (kepviselok[i].part == "TISZ")
@@ -156,7 +156,7 @@ namespace Valasztas
                     if (kepviselok[i].szavazat > maxTisz)
                     {
                         maxTisz = kepviselok[i].szavazat;
-                        indexek[2] = i; // Store the index of the top candidate for TISZ
+                        indexek[2] = i; 
                     }
                 }
                 else if (kepviselok[i].part == "ZEP")
@@ -164,15 +164,15 @@ namespace Valasztas
                     if (kepviselok[i].szavazat > maxZep)
                     {
                         maxZep = kepviselok[i].szavazat;
-                        indexek[3] = i; // Store the index of the top candidate for ZEP
+                        indexek[3] = i;
                     }
                 }
-                else // Assuming the rest are independents
+                else
                 {
                     if (kepviselok[i].szavazat > maxFugg)
                     {
                         maxFugg = kepviselok[i].szavazat;
-                        indexek[4] = i; // Store the index of the top independent candidate
+                        indexek[4] = i;
                     }
                 }
             }
