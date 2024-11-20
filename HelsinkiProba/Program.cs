@@ -72,7 +72,7 @@ namespace Helsinki
             else if (uszas_ermek == torna_ermek)
                 Console.WriteLine("Torna és úszás sportágban ugyanannyi érmet szereztek");
             else
-                Console.WriteLine("Torna sportágban szereztek több érmet\n");
+                Console.WriteLine("Torna sportágban szereztek több érmet");
             
             // 7. Feladat
             List<string> masolat = new List<string>();
@@ -82,35 +82,37 @@ namespace Helsinki
                 if (fix == "kajakkenu")
                 {
                     fix = "kajak-kenu";
-                    masolat.Add($"{item.helyezes} {item.sportag}, {lehetseges_pontszamok[item.helyezes] - 1} {fix}, {item.versenyszam}");
                 }
+                masolat.Add($"{item.helyezes} {item.sportolok} {lehetseges_pontszamok[item.helyezes - 1]} {fix} {item.versenyszam}");
             }
             File.WriteAllLines("helsinki2.txt", masolat);  
             
             // 8. Feladat
-            Console.WriteLine("8. feladat");
+            Console.WriteLine("\n8. feladat");
             
-            int legnagyobb_csapat = 0;
-            List<Helyezes> segito = new List<Helyezes>();
-            Helyezes[] segito2 = new Helyezes[segito.Count()];
-
-            foreach (var item in File.ReadAllLines("helsinki2.txt"))
+            List<Helyezes> uj = new List<Helyezes>();
+            foreach (var item in File.ReadAllLines("helsinki.txt"))
             {
-                segito.Add(new Helyezes(item));
+                uj.Add(new Helyezes(item));
             }
+
+            int legnagyobb_csapat = 0;
             int hm = 0;
-            foreach (var item in segito)
+            int legnagyobb_csapat_index = 0;
+
+            foreach (var item in uj)
             {
                 if (legnagyobb_csapat < item.sportolok)
                 {
                     legnagyobb_csapat = item.sportolok;
-                    segito2[hm].helyezes = item.helyezes; segito2[hm].sportolok = item.sportolok;
-                    segito2[hm].sportag = item.sportag; segito2[hm].versenyszam = item.versenyszam;
+                    legnagyobb_csapat_index = hm;
                 }
                 hm++;
             }
+            
             Console.WriteLine("Helyezés: {0}\nSportág: {1}\nVersenyszám: {2}\nSportolók Száma: {3}",
-            segito2.helyezes, segito2.sportag, segito2.versenyszam, segito2.sportolok);
+            uj[legnagyobb_csapat_index].helyezes, uj[legnagyobb_csapat_index].sportag, 
+            uj[legnagyobb_csapat_index].versenyszam, uj[legnagyobb_csapat_index].sportolok);
         }
     }
 }
