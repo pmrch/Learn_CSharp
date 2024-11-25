@@ -9,8 +9,8 @@ namespace Valasztas
     {
         struct EgyKepviselo
         {
-            public string vnev, knev, korzet, part;
-            public int szavazat;
+            public string vnev, knev, part;
+            public int szavazat, korzet;
         }
         static void Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace Valasztas
                     string[] egy_sor = reader.ReadLine().Split(' ');
                     EgyKepviselo seged = new EgyKepviselo();
                     
-                    seged.korzet = egy_sor[0]; seged.szavazat = int.Parse(egy_sor[1]);
+                    seged.korzet = int.Parse(egy_sor[0]); seged.szavazat = int.Parse(egy_sor[1]);
                     seged.vnev = egy_sor[2]; seged.knev = egy_sor[3]; seged.part = egy_sor[4]; 
                     
                     kepviselok.Add(seged);
@@ -101,11 +101,11 @@ namespace Valasztas
                     fugg += item.szavazat;
                 }
             }
-            Console.WriteLine($"Gyümölcsevők pártja= {Math.Round((float)gyep / osszeg * 100, 2)}%");
-            Console.WriteLine($"Húsevők pártja= {Math.Round((float)hep / osszeg * 100, 2)}%");
-            Console.WriteLine($"Tejivók szövetsége= {Math.Round((float)tisz / osszeg * 100, 2)}%");
-            Console.WriteLine($"Zöldségevők pártja= {Math.Round((float)zep / osszeg * 100, 2)}%");
-            Console.WriteLine($"Független jelöltek= {Math.Round((float)fugg / osszeg * 100, 2)}%\n");
+            Console.WriteLine($"Gyümölcsevők pártja = {Math.Round((float)gyep / osszeg * 100, 2)}%");
+            Console.WriteLine($"Húsevők pártja = {Math.Round((float)hep / osszeg * 100, 2)}%");
+            Console.WriteLine($"Tejivók szövetsége = {Math.Round((float)tisz / osszeg * 100, 2)}%");
+            Console.WriteLine($"Zöldségevők pártja = {Math.Round((float)zep / osszeg * 100, 2)}%");
+            Console.WriteLine($"Független jelöltek = {Math.Round((float)fugg / osszeg * 100, 2)}%\n");
 
             // 6. Feladat
             Console.WriteLine("6. Feladat");
@@ -129,60 +129,76 @@ namespace Valasztas
 
             // 7. Feladat
             Console.WriteLine("\n7. Feladat");
-            int[] indexek = new int[5];
+            int[] korzetek = new int[9];
+            korzetek[0] = 0;
+            List<int> indexek = new List<int>();
 
-            int maxGyep = 0, maxHep = 0, maxTisz = 0, maxZep = 0, maxFugg = 0;
-
-            for (int i = 0; i < kepviselok.Count(); i++)
+            foreach (var item in kepviselok)
             {
-                if (kepviselok[i].part == "GYEP")
+                for (int i = 0; i < korzetek.Length; i++)
                 {
-                    if (kepviselok[i].szavazat > maxGyep)
+                    if (item.korzet == i)
                     {
-                        maxGyep = kepviselok[i].szavazat;
-                        indexek[0] = i;
-                    }
-                }
-                else if (kepviselok[i].part == "HEP")
-                {
-                    if (kepviselok[i].szavazat > maxHep)
-                    {
-                        maxHep = kepviselok[i].szavazat;
-                        indexek[1] = i;
-                    }
-                }
-                else if (kepviselok[i].part == "TISZ")
-                {
-                    if (kepviselok[i].szavazat > maxTisz)
-                    {
-                        maxTisz = kepviselok[i].szavazat;
-                        indexek[2] = i; 
-                    }
-                }
-                else if (kepviselok[i].part == "ZEP")
-                {
-                    if (kepviselok[i].szavazat > maxZep)
-                    {
-                        maxZep = kepviselok[i].szavazat;
-                        indexek[3] = i;
-                    }
-                }
-                else
-                {
-                    if (kepviselok[i].szavazat > maxFugg)
-                    {
-                        maxFugg = kepviselok[i].szavazat;
-                        indexek[4] = i;
+                        if (item.szavazat > korzetek[i])
+                        {
+                            korzetek[i] = item.szavazat;
+                        }
                     }
                 }
             }
-            
-            if (indexek[0] != -1) Console.WriteLine($"1 {kepviselok[indexek[0]].vnev} {kepviselok[indexek[0]].knev} {kepviselok[indexek[0]].part}");
-            if (indexek[1] != -1) Console.WriteLine($"2 {kepviselok[indexek[1]].vnev} {kepviselok[indexek[1]].knev} {kepviselok[indexek[1]].part}");
-            if (indexek[2] != -1) Console.WriteLine($"3 {kepviselok[indexek[2]].vnev} {kepviselok[indexek[2]].knev} {kepviselok[indexek[2]].part}");
-            if (indexek[3] != -1) Console.WriteLine($"4 {kepviselok[indexek[3]].vnev} {kepviselok[indexek[3]].knev} {kepviselok[indexek[3]].part}");
-            if (indexek[4] != -1) Console.WriteLine($"5 {kepviselok[indexek[4]].vnev} {kepviselok[indexek[4]].knev} fuggetlen");
-            
+            using (StreamWriter writer = new StreamWriter("kepviselok.txt"))
+            {
+                for (int i = 1; i < korzetek.Length; i++)
+                {
+                    foreach (var item in kepviselok)
+                    {
+                        if (i == item.korzet && korzetek[i] == item.szavazat)
+                        {
+                            if (item.part != "-") 
+                            {
+                                Console.WriteLine($"{item.korzet} {item.vnev} {item.knev} {item.part}");
+                                writer.WriteLine($"{item.korzet}, {item.vnev}, {item.knev}, {item.part}");
+                            }
+                            else 
+                            {
+                                Console.WriteLine($"{item.korzet} {item.vnev} {item.knev} fuggetlen");
+                                writer.WriteLine($"{item.korzet}, {item.vnev}, {item.knev}, fuggetlen");
+                            }
+                        }
+                    }
+                }
+            // 7. feadat másként
+            Console.WriteLine("");
+                for (int i = 1; i < 9; i++)
+                {
+                    bool elso = true;
+                    int maxim = 0;
+                    int maxh = 0;
+
+                    for (int j = 0; j < kepviselok.Count(); j++)
+                    {
+                        if (kepviselok[j].korzet == i)
+                        {
+                            if (elso)
+                            {
+                                maxim = kepviselok[j].szavazat;
+                                maxh = j;
+                                elso = false;
+                            }
+                            else
+                            {
+                                if (kepviselok[j].szavazat > maxim)
+                                {
+                                    maxh = j;
+                                    maxim = kepviselok[j].szavazat;
+                                }
+                            }
+                        }
+                    }
+                    if (kepviselok[maxh].part == "-") Console.WriteLine($"{kepviselok[maxh].korzet} {kepviselok[maxh].vnev} {kepviselok[maxh].knev} fuggetlen");
+                    else Console.WriteLine($"{kepviselok[maxh].korzet} {kepviselok[maxh].vnev} {kepviselok[maxh].knev} {kepviselok[maxh].part}");                
+                }
+            }
         }
     }
 }
