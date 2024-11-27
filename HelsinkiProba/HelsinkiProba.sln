@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelsinkiProba", "HelsinkiProba.csproj", "{B54DF6D4-8042-4CAD-AEF1-5598EF9DC74F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPv6", "..\IPv6\IPv6.csproj", "{2E9A8E02-0B6A-4761-8376-13367CFEE969}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{B54DF6D4-8042-4CAD-AEF1-5598EF9DC74F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B54DF6D4-8042-4CAD-AEF1-5598EF9DC74F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B54DF6D4-8042-4CAD-AEF1-5598EF9DC74F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9A8E02-0B6A-4761-8376-13367CFEE969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9A8E02-0B6A-4761-8376-13367CFEE969}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9A8E02-0B6A-4761-8376-13367CFEE969}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9A8E02-0B6A-4761-8376-13367CFEE969}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
