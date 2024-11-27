@@ -84,15 +84,31 @@ class Program
 
         // 6. Feladat: Kérem a keresendő rendszámot: 
         string rsz = Console.ReadLine();
-        string eredmeny = "";
+        // Replace '*' with '.*' to allow it to match any character (letters and digits)
+        string regex_pattern = rsz.Replace("*", ".*");
+
+        Regex pattern = new Regex($"^{regex_pattern}$");
+        List<string> talalatok = new List<string>();
+        List<string> rendszamok = new List<string>();
 
         foreach (var item in jarmuveks)
         {
-            if (rsz.Contains("*"))
+            rendszamok.Add(item.rendszam);
+        }
+        rendszamok.Sort();
+
+        foreach (var item in rendszamok)
+        {
+            if (pattern.IsMatch(item))
             {
-                if (rsz.Replace('*', ''))
+                talalatok.Add(item);
             }
         }
-        Console.WriteLine(eredmeny);
+
+        foreach (var item in talalatok)
+        {
+            Console.WriteLine(item);
+        }
+        
     }
 }
