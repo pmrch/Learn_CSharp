@@ -82,7 +82,8 @@ class Program
         }
         Console.WriteLine($"{TimeSpan.FromSeconds(kezd_ido)} - {TimeSpan.FromSeconds(kezd_ido + max_delta)}");
 
-        // 6. Feladat: Kérem a keresendő rendszámot: 
+        // 6. Feladat: 
+        Console.WriteLine("\n6. Feladat: Kérem a keresendő rendszámot:");
         string rsz = Console.ReadLine();
         // Replace '*' with '.*' to allow it to match any character (letters and digits)
         string regex_pattern = rsz.Replace("*", ".*");
@@ -110,5 +111,22 @@ class Program
             Console.WriteLine(item);
         }
         
+        // 7. Feladat
+        using (StreamWriter writer = new StreamWriter("vizsgalt.txt"))
+        {
+            List<Jarmuvek> vizsgalt = new List<Jarmuvek>();
+
+            Console.WriteLine("{0} {1}", new TimeSpan(jarmuveks[0].ora, jarmuveks[0].perc, jarmuveks[0].mp).ToString().Replace(':', ' '), jarmuveks[0].rendszam);
+            for (int i = 1; i < jarmuveks.Count(); i++)
+            {
+                int def = ToSeconds(jarmuveks[i - 1].ora, jarmuveks[i - 1].perc, jarmuveks[i - 1].mp);
+                
+                while ((ToSeconds(jarmuveks[i].ora, jarmuveks[i].perc, jarmuveks[i].mp) < def + 300) && i < jarmuveks.Count() - 1)
+                {
+                    i++;
+                }
+                Console.WriteLine($"{(jarmuveks[i].ora, jarmuveks[i].perc, jarmuveks[i].mp)}".Replace(':', ' '), $"{jarmuveks[i].rendszam}");
+            }
+        }
     }
 }
