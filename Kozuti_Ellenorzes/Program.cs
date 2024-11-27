@@ -116,7 +116,7 @@ class Program
         {
             List<Jarmuvek> vizsgalt = new List<Jarmuvek>();
 
-            Console.WriteLine("{0} {1}", new TimeSpan(jarmuveks[0].ora, jarmuveks[0].perc, jarmuveks[0].mp).ToString().Replace(':', ' '), jarmuveks[0].rendszam);
+            writer.WriteLine("{0} {1}", new TimeSpan(jarmuveks[0].ora, jarmuveks[0].perc, jarmuveks[0].mp).ToString().Replace(':', ' '), jarmuveks[0].rendszam);
             for (int i = 1; i < jarmuveks.Count(); i++)
             {
                 int def = ToSeconds(jarmuveks[i - 1].ora, jarmuveks[i - 1].perc, jarmuveks[i - 1].mp);
@@ -125,7 +125,10 @@ class Program
                 {
                     i++;
                 }
-                Console.WriteLine($"{(jarmuveks[i].ora, jarmuveks[i].perc, jarmuveks[i].mp)}".Replace(':', ' '), $"{jarmuveks[i].rendszam}");
+                if (ToSeconds(jarmuveks[jarmuveks.Count() - 1].ora, jarmuveks[jarmuveks.Count() - 1].perc, jarmuveks[jarmuveks.Count() - 1].mp) > def + 300)
+                {
+                    writer.WriteLine($"{new TimeSpan(jarmuveks[i].ora, jarmuveks[i].perc, jarmuveks[i].mp)} {jarmuveks[i].rendszam}".Replace(':', ' '));
+                }
             }
         }
     }
