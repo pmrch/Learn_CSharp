@@ -64,5 +64,6 @@ class Program
 
         // 6. Feladat
         Console.WriteLine("\n6. Feladat");
+        int sorszam = int.Parse(Console.ReadLine());
     }
 }
