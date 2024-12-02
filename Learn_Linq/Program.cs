@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace LearnLinq
 {
@@ -33,11 +34,18 @@ namespace LearnLinq
             Console.WriteLine("\n30 év feletti emberek száma: {0}", count);
             
             //Console.WriteLine(people.Count());
-            var people_between_30_35 = people.Where(p => p.Age < 35 && p.Age > 30);
-            Console.WriteLine("\n30 és 35 közötti emberek: ");
+            var people_between_30_35 = people.Count(p => p.Age < 35 && p.Age > 30);
+            Console.WriteLine("30 és 35 közötti emberek száma: {0}", people_between_30_35);
+
+            // 
+            Regex pattern = new Regex("^A");
+            var nagy_a = people.Where(p => pattern.IsMatch(p.Name));
             
-            foreach (var item in people_between_30_35)
-                Console.WriteLine($"{item.Name}, {item.Age} éves");
+            Console.WriteLine("Nagy A-val kezdődő emberek: ");
+            foreach (var item in nagy_a)
+            {
+                Console.WriteLine(item.Name);
+            }
         }
     }
 }
