@@ -64,6 +64,21 @@ class Program
 
         // 6. Feladat
         Console.WriteLine("\n6. Feladat");
-        int sorszam = int.Parse(Console.ReadLine());
+        int sz = int.Parse(Console.ReadLine());
+        string tetel = seged[sz];
+        List<string> rovid = new List<string>();
+
+        for (int i = 0; i < tetel.Length; i++)
+        {
+            int n = 0;
+            while (tetel[i] != ':')
+            {
+                n++;
+                if (n == 4)
+                {
+                    rovid[i] = 0;
+                }
+            }
+        }
     }
 }
