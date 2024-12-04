@@ -19,10 +19,6 @@ class Program
         foreach (var item in bekert_nap_autoi) Console.WriteLine($"{item.ora_perc} {item.rendszam} {item.km_ora} {item.ki_be}");
 
         // 4. Feladat
-        int autok_parkoloban = 0;
-        foreach (var item in autoks)
-        {
-            
-        }
+        
     }
 }
