@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace Lift;
 
@@ -25,8 +26,15 @@ class Program
         }
 
         // 2. Feladat
+        int induloszint = 0;
+
         Console.Write("\n2. Adja meg a kezdő szint számát: ");
-        int induloszint = int.Parse(Console.ReadLine());
+        induloszint = int.Parse(Console.ReadLine());
+        while (induloszint > 101 || induloszint == 0)
+        {
+            Console.Write("\n2. Adja meg a kezdő szint számát: ");
+            induloszint = int.Parse(Console.ReadLine());
+        }
 
         // 3. Feladat
         var vegso_szint = igenyek.Last().end;
@@ -39,17 +47,17 @@ class Program
         Console.WriteLine("\n4. Feladat\nA legmagasabb szint: {0}\nA legalacsonyabb szint: {1}", max, min);
 
         // 5. Feladat
-        var count = igenyek.Where(p => p.start < p.end).Count();
-        var count2 = igenyek.Where(p => p.end < p.start).Count();
-        Console.WriteLine($"\nUtassal: {count}  Utas nélkül: {count2}");
+        
 
         // 6. Feladat
-        HashSet<int> csapatok = new HashSet<int>();
-        foreach(var item in igenyek) csapatok.Add(item.sorszam);
-        
-        string nem_vette_igenybe = "";
-        foreach(var item in nem_vette_igenybe)
+        List<int> ossz_csapatok = new List<int>();
+        HashSet<int> hasznalt_csapatok = new HashSet<int>();
 
-        Console.WriteLine("\nNem vette igénybe a liftet: {0}", nem_vette_igenybe);
+        foreach(var item in igenyek) hasznalt_csapatok.Add(item.sorszam);
+        for (int i = 1; i <= alapadatok[1]; i++) ossz_csapatok.Add(i);
+        var csapatok = ossz_csapatok.Where(p => !hasznalt_csapatok.Contains(p));
+    
+        Console.Write("\n6. A kovetkezo csapatok nem hasznaltak a liftet: ");
+        foreach (var item in csapatok) Console.Write($"{item} ");
     }
 }

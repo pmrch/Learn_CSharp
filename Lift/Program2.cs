@@ -18,7 +18,7 @@ namespace Lift_lista
         private static Random rnd = new Random();
         private static int véletlencsapat=3;
 
-        static void nMain(string[] args)
+        static void Maine(string[] args)
         {
             Feladat1();
             Feladat2();
