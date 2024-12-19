@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace Lift;
@@ -47,8 +48,17 @@ class Program
         Console.WriteLine("\n4. Feladat\nA legmagasabb szint: {0}\nA legalacsonyabb szint: {1}", max, min);
 
         // 5. Feladat
-        
+        var count = 0;
+        var count2 = 0;
 
+        foreach (var igeny_var in igenyek)
+        {
+            if (igeny_var.start < igeny_var.end) count++;
+            if (induloszint < igeny_var.start) count2++;
+            induloszint = igeny_var.end;
+        }
+
+        Console.WriteLine($"\n5. Feladat\nUtassal: {count}  Utas nélkül: {count2}");
         // 6. Feladat
         List<int> ossz_csapatok = new List<int>();
         HashSet<int> hasznalt_csapatok = new HashSet<int>();
@@ -59,5 +69,9 @@ class Program
     
         Console.Write("\n6. A kovetkezo csapatok nem hasznaltak a liftet: ");
         foreach (var item in csapatok) Console.Write($"{item} ");
+
+        // 7. Feladat
+        Random random_sorszam = new Random();
+        
     }
 }
