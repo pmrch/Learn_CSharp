@@ -12,7 +12,7 @@ class Program
         Console.WriteLine($"2. Feladat\n{autoks[autoks.Count() - 1].nap}. nap rendszám: {autoks[autoks.Count() - 1].rendszam}");
 
         // 3. Feladat
-        Console.Write("\nNap: ");
+        Console.Write("\n3.Feladat\nNap: ");
         int bekert_nap = int.Parse(Console.ReadLine());
         var bekert_nap_autoi = autoks.Where(p => p.nap == bekert_nap);
         
