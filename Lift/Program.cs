@@ -71,7 +71,14 @@ class Program
         foreach (var item in csapatok) Console.Write($"{item} ");
 
         // 7. Feladat
+        List<int> szintek = new List<int>();
         Random random_sorszam = new Random();
+        int sz = random_sorszam.Next(1 ,alapadatok[1]);
         
+        var seged = igenyek.Where(p => p.sorszam == sz);
+        for (int i = 0; i < seged.Count(); i++)
+        {
+            
+        }
     }
 }
