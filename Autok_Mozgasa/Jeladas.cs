@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices.ComTypes;
+
 public class Jeladas {
     public string rendszam;
     public int ora; public int perc; public int sebesseg;

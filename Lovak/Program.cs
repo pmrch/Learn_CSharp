@@ -20,8 +20,8 @@ namespace Lovak
         static void Main(string[] args)
         {
             List<int> erossegek = new List<int>();
-            foreach (var item in File.ReadAllLines("be1.txt")) erossegek.Add(int.Parse(item));
-            
+            foreach (var item in File.ReadAllLines("be2.txt")) erossegek.Add(int.Parse(item));
+
             int N = erossegek[0];
 
             for (int i = 1; i <= N; i++)

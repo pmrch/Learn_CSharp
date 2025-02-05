@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices.ComTypes;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Autok_Mozgasa;
 
@@ -15,7 +17,7 @@ class Program
                 int.Parse(oneline[2]), int.Parse(oneline[3])));
             }
         } catch (Exception ex) {
-            Console.WriteLine($"Error filling the list: {ex}");
+            Console.WriteLine($"Error filling the list: {ex.Message}");
         }
 
         // 2. Feladat
@@ -76,7 +78,7 @@ class Program
         for (int i = 0; i < tmp_kocsik.Count() - 1 ; i++) {
             string new_perc = "";
             if (tmp_kocsik[i].perc < 10) new_perc = $"0{tmp_kocsik[i].perc}"; else new_perc = $"{tmp_kocsik[i].perc}";
-            Console.WriteLine($"{tmp_kocsik[i].ora}:{new_perc} {tav} km");
+            Console.WriteLine($"{tmp_kocsik[i].ora}:{new_perc} {tav} km".Replace(',', '.'));
             
             float ido = tmp_kocsik[i].ora + tmp_kocsik[i].perc / 60.0f;
             ido2 = tmp_kocsik[i + 1].ora + tmp_kocsik[i + 1].perc / 60.0f;
@@ -91,11 +93,28 @@ class Program
         kul = utolso.ora + utolso.perc / 60.0f - ido2;
         tav += kul * utolso.sebesseg;
 
-        Console.WriteLine($"{utolso.ora}:{utolso.perc} {tav} km");
+        Console.WriteLine($"{utolso.ora}:{utolso.perc} {tav} km".Replace(',', '.'));
 
         // 7. Feladat
         Console.WriteLine("\n7.Feladat");
+        
+        using (StreamWriter writer = new StreamWriter("ido.txt")) {
+            List<string> rendszamok = new List<string>();
+            List<string> idok = new List<string>();
 
+            foreach (var item in jeladasok) if (!rendszamok.Contains(item.rendszam)) rendszamok.Add(item.rendszam);
+
+            for (int i = 0; i < rendszamok.Count(); i++) {
+                for (int j = 0; j < jeladasok.Count(); j++) {
+                    if (jeladasok[j].rendszam == rendszamok[i]) {
+                        idok.Add($"{jeladasok[j].rendszam} {jeladasok[j].ora} {jeladasok[j].perc}\n");
+                    }
+                }
+                writer.Write($"{idok.First()}{idok.Last().Split()[1]} {idok.Last().Split()[2]}".ToString().Replace('\n', ' '));
+                writer.Write('\n');
+                idok.Clear();
+            }
+        }
         
     }
 }
