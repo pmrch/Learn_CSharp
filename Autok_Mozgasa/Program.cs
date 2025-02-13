@@ -75,7 +75,7 @@ class Program
         float kul = 0.0f;
         float ido2 = 0.0f;
         
-        for (int i = 0; i < tmp_kocsik.Count() - 1 ; i++) {
+        for (int i = 0; i < tmp_kocsik.Count() - 1; i++) {
             string new_perc = "";
             if (tmp_kocsik[i].perc < 10) new_perc = $"0{tmp_kocsik[i].perc}"; else new_perc = $"{tmp_kocsik[i].perc}";
             Console.WriteLine($"{tmp_kocsik[i].ora}:{new_perc} {tav} km".Replace(',', '.'));
@@ -88,13 +88,13 @@ class Program
             tav = Math.Round(tav, 1);
         }
         kul = 0;
-        
+            
         var utolso = tmp_kocsik[tmp_kocsik.Count() - 1];
         kul = utolso.ora + utolso.perc / 60.0f - ido2;
         tav += kul * utolso.sebesseg;
 
         Console.WriteLine($"{utolso.ora}:{utolso.perc} {tav} km".Replace(',', '.'));
-
+        
         // 7. Feladat
         Console.WriteLine("\n7.Feladat");
         
